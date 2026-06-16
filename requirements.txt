@@ -1,4 +1,4 @@
-Django==6.0.6
+Django==5.2.7
 djangorestframework
 google-genai==2.8.0
 gunicorn==26.0.0
