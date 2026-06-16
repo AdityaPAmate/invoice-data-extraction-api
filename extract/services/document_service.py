@@ -15,7 +15,7 @@ def extract_text_from_document(uploaded_file):
                 extracted_text.append(page.get_text())
 
             document.close()
-            print('this is extracted text: ', "\n".join(extracted_text))
+            # print('this is extracted text: ', "\n".join(extracted_text))
             return "\n".join(extracted_text)
         except:
             raise Exception('Unable to read the PDF File.')
