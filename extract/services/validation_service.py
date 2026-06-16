@@ -8,10 +8,7 @@ def validate_gemini_response(response_text):
 
     # Remove Markdown code fences if present
     cleaned_text = (
-        response_text
-        .replace("```json", "")
-        .replace("```", "")
-        .strip()
+        response_text.replace("```json", "").replace("```", "").strip()
     )
 
     try:
