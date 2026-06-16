@@ -17,7 +17,7 @@ def extract_invoice(request):
             }, status=400)
         try:
             invoice_text = extract_text_from_document(file)
-
+            print(f"Invoice text length: {len(invoice_text)} characters")
             gemini_response = extract_invoice_data(invoice_text)
 
             validated_response = validate_gemini_response(gemini_response)

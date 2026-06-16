@@ -19,6 +19,8 @@ def extract_invoice_data(invoice_text):
     """
 
     prompt = get_invoice_prompt(invoice_text)
+    print(f"Prompt length: {len(prompt)} characters")
+
     try:
         response = client.models.generate_content(
             model="gemini-2.5-flash",
