@@ -26,8 +26,10 @@ def extract_invoice_data(invoice_text):
             model="gemini-2.5-flash",
             contents=prompt
         )
+        response_text = response.text
+        del response
         del prompt
         gc.collect()
-        return response.text
+        return response_text
     except Exception as e:
         raise  Exception(f"Gemini API Error: {str(e)}")
