@@ -3,6 +3,7 @@ import numpy as np
 
 from PIL import Image
 from paddleocr import PaddleOCR
+import gc
 
 ocr = None
 
@@ -23,10 +24,9 @@ def get_ocr():
 
 def extract_text_from_image(image_file):
     image = Image.open(image_file).convert("RGB")
-
+    del image_file
     image_array = np.array(image)
-
-    import gc
+    del image
 
     result = get_ocr().ocr(image_array)
 
@@ -37,6 +37,7 @@ def extract_text_from_image(image_file):
 
     text = "\n".join(extracted_text)
 
+    del extracted_text
     del image_array
     del result
 

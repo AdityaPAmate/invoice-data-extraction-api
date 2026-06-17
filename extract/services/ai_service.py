@@ -1,5 +1,5 @@
 import os
-
+import gc
 from google import genai
 
 from ..prompts.invoice_prompt import get_invoice_prompt
@@ -19,14 +19,15 @@ def extract_invoice_data(invoice_text):
     """
 
     prompt = get_invoice_prompt(invoice_text)
-    print(f"Prompt length: {len(prompt)} characters")
+    del invoice_text
 
     try:
         response = client.models.generate_content(
             model="gemini-2.5-flash",
             contents=prompt
         )
-
+        del prompt
+        gc.collect()
         return response.text
     except Exception as e:
         raise  Exception(f"Gemini API Error: {str(e)}")

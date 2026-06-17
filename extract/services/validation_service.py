@@ -1,20 +1,20 @@
 import json
-
+import gc
 
 def validate_gemini_response(response_text):
     """
     Cleans Gemini output and converts it into a Python object.
     """
-
     # Remove Markdown code fences if present
     cleaned_text = (
         response_text.replace("```json", "").replace("```", "").strip()
     )
-
+    del response_text
     try:
         # Convert JSON string into Python object
         parsed_data = json.loads(cleaned_text)
-
+        del cleaned_text
+        gc.collect()
     except json.JSONDecodeError as e:
         raise ValueError(
             f"Gemini returned invalid JSON.\nError: {e}\nResponse:\n{cleaned_text}"
