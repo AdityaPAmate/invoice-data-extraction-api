@@ -33,6 +33,10 @@ def extract_text_from_document(uploaded_file):
         except Exception:
             raise Exception("Unable to read the PDF File.")
 
+        finally:
+            if document:
+                document.close()
+
     elif content_type in ["image/png", "image/jpeg", "image/jpg"]:
         return extract_text_from_image(uploaded_file)
 

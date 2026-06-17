@@ -16,17 +16,22 @@ def extract_invoice(request):
             }, status=400)
         try:
             invoice_text = extract_text_from_document(file)
-            del file
-            gemini_response = extract_invoice_data(invoice_text)
-            del invoice_text
-            gc.collect()
-            validated_response = validate_gemini_response(gemini_response)
 
-            return JsonResponse({
+            gemini_response = extract_invoice_data(invoice_text)
+
+            validated_response = validate_gemini_response(gemini_response)
+            response_data= {
                 "success": True,
                 "message": "Invoice extracted successfully.",
                 "data": validated_response
-            })
+            }
+
+            del invoice_text
+            del gemini_response
+            del validated_response
+            gc.collect()
+
+            return JsonResponse(response_data)
         except Exception as e:
             return  JsonResponse({
                 'error': str(e)
