@@ -26,6 +26,7 @@ def extract_invoice_data(invoice_text):
             model="gemini-2.5-flash",
             contents=prompt
         )
+        print(response.usage_metadata)
         response_text = response.text
         del response
         del prompt
