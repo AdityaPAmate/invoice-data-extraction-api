@@ -6,17 +6,16 @@ import gc
 from .text_cleaner_service import clean_invoice_text
 ocr = None
 
-
 def get_ocr():
     global ocr
 
     if ocr is None:
-        print("Loading PaddleOCR model...")
+        from paddleocr import PaddleOCR
+
         ocr = PaddleOCR(
             use_angle_cls=True,
-            lang="en"
+            lang="en",
         )
-        print("PaddleOCR loaded successfully.")
 
     return ocr
 
