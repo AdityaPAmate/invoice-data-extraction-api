@@ -1,6 +1,6 @@
 import json
 import gc
-
+from .gst_service import verify_gst
 def validate_gemini_response(response_text):
     """
     Cleans Gemini output and converts it into a Python object.
@@ -56,4 +56,8 @@ def validate_gemini_response(response_text):
             raise ValueError(
                 f"'items' in Invoice {index} must be a list."
             )
-    return parsed_data
+
+        gst_verified_data=verify_gst(parsed_data)
+        # print(gst_verified_data)
+
+    return gst_verified_data

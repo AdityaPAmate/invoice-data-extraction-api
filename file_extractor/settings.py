@@ -31,6 +31,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # DEBUG = os.getenv("DEBUG", "True") == "True"
 DEBUG = False
 
+GST_VERIFY_API_KEY = os.getenv("X-API-Key")
+
 ALLOWED_HOSTS = ["*"]
 
 
